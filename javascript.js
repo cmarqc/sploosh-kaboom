@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	function buildGrid(){
 		table.innerHTML = '';
 		table.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+		table.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
 		for(let r=0;r<rows;r++){
 			for(let c=0;c<cols;c++){
 				const idx = r*cols + c;
@@ -81,11 +82,21 @@ document.addEventListener('DOMContentLoaded', function(){
 		setMessage(`Sink ${shipCount} ship(s). Good luck cap'n!`);
 	}
 
-	function revealShips(){
+	function revealShips(won){
 		const all = document.querySelectorAll('.btn-tile');
 		ships.flat().forEach(i=>{
 			const cell = all[i];
-			if(cell) cell.classList.add('ship');
+			if(!cell) return;
+			if(won){
+				cell.classList.add('ship');
+			} else {
+				// if this ship cell wasn't hit, mark as missed ship
+				if(!hits.has(i)){
+					cell.classList.add('ship-miss');
+				} else {
+					cell.classList.add('hit');
+				}
+			}
 		});
 	}
 
