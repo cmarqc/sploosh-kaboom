@@ -37,6 +37,7 @@ h1 {
 #controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;justify-content:space-between;margin:0.5rem 0}
 #difficulty{display:flex;gap:0.5rem;align-items:center}
 .mode,#customToggle,#startCustom,#reset{padding:0.4rem 0.6rem;border-radius:8px;border:2px solid #333;background:#fff}
+.mode.selected{background:#ffeb3b;color:#222;border-color:#b89400;box-shadow:0 0 0 2px rgba(255,235,59,0.35)}
 #custom{display:flex;gap:0.5rem;align-items:center}
 #status{display:flex;gap:1rem;align-items:center}
 #bomb{background:url("images/bomb.png") no-repeat center center; background-size:contain; height:110px; width:90px; display:flex; align-items:center; justify-content:center; text-align:center;}
@@ -44,9 +45,9 @@ h1 {
 .unselectable { user-drag: none; user-select: none; -moz-user-select: none; -webkit-user-drag: none; -webkit-user-select: none; -ms-user-select: none; }
 /* Grid styles */
 #table{display:grid;gap:4px;margin-top:1rem}
-.tile{background:#fff;border:1px solid #222;padding:0;width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem}
+.tile{background:#fff;border:1px solid #222;padding:0;width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:3rem}
 .tile.btn-tile{cursor:pointer}
-.tile.hit{background:#fff1a8;color:#000; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);}
+.tile.hit{background:#fff1a8;color:#ffea00; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);}
 .tile.miss{background:#d7e7ff;color:#003d99;}
 .tile.ship{outline:3px solid rgba(255,0,0,0.4)}
 

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	const customShips = document.getElementById('customShips');
 	const modeButtons = Array.from(document.querySelectorAll('.mode'));
 
-	let rows = 10, cols = 10, shipCount = 3, guessesRemaining = 0;
+	let rows = 6, cols = 6, shipCount = 1, guessesRemaining = 0;
 	let ships = []; // array of ship cell indexes
 	let hits = new Set();
 	let misses = new Set();
@@ -133,12 +133,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
+	function setSelectedMode(selectedBtn){
+		modeButtons.forEach(btn=>btn.classList.toggle('selected', btn===selectedBtn));
+	}
+
 	// UI handlers
 	modeButtons.forEach(btn=>{
 		btn.addEventListener('click', ()=>{
 			const r = Number(btn.dataset.rows);
 			const c = Number(btn.dataset.cols);
 			const s = Number(btn.dataset.ships);
+			setSelectedMode(btn);
 			startGame(r,c,s);
 		});
 	});
