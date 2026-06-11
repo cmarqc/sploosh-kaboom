@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let ships = []; // array of ship cell indexes
 	let hits = new Set();
 	let misses = new Set();
+	let shipLenMin = 3, shipLenMax = 3;
 	let kaboom = new Audio('sounds/kaboom.mp3');
 	let sploosh = new Audio('sounds/sploosh.mp3');
 
@@ -42,13 +43,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	function placeShips(){
 		ships = [];
 		const maxAttempts = 5000;
-		const shipLen = 3;
 		const occupied = new Set();
 
 		for(let s=0;s<shipCount;s++){
 			let placed = false;
 			let attempts = 0;
 			while(!placed && attempts++ < maxAttempts){
+				// choose a ship length for this ship within allowed range
+				let shipLen = Math.min(Math.max(1, Math.floor(Math.random()*(shipLenMax - shipLenMin + 1)) + shipLenMin), Math.max(rows,cols));
 				const orientation = Math.random() < 0.5 ? 'h' : 'v';
 				const r = Math.floor(Math.random()*rows);
 				const c = Math.floor(Math.random()*cols);
@@ -136,11 +138,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(const ship of ships){ if(ship.every(i=>hits.has(i))) sunkCount++; }
 		if(sunkCount >= shipCount){
 			setMessage("Congrats cap'n! You sunk all enemy ships!");
-			revealShips();
+			revealShips(true);
 			guessesRemaining = 0; updateCounter();
 		} else if(guessesRemaining<=0){
 			setMessage('Ze enemy has escaped. We have failed...');
-			revealShips();
+			revealShips(false);
 		}
 	}
 
@@ -154,6 +156,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			const r = Number(btn.dataset.rows);
 			const c = Number(btn.dataset.cols);
 			const s = Number(btn.dataset.ships);
+			// set ship size ranges based on difficulty
+			const label = (btn.textContent||'').trim().toLowerCase();
+			if(label === 'easy'){
+				shipLenMin = 3; shipLenMax = 3;
+			} else if(label === 'medium'){
+				shipLenMin = 3; shipLenMax = 4;
+			} else if(label === 'hard'){
+				shipLenMin = 3; shipLenMax = 5;
+			}
 			setSelectedMode(btn);
 			startGame(r,c,s);
 		});
