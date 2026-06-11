@@ -11,14 +11,31 @@
 
 <body>
 <!--Creating the container that holds all of the game information, including title, gameboard, etc.-->
-	<div id="gamecontainer"><h1 class="unselectable">Sinking Ships!</h1>
-	<p id="guessescontainer">Take command of our new radar system to seek out
-	and sink ze fiendishly hidden enemy!</p>
-	<!--Bomb icon that contains the amount of "turns" a player has left-->
-	<div id="bomb" class="unselectable"><h1 id="counter">7</h1></div>
-	<p id="guess">Guess a number from 1 to 20!&nbsp <input id="inputNum" type="number">&nbsp <input id="guessButton"
-	 value="Guess" type="button"></p>
-	<div id="table" class="unselectable"></div>
+	<div id="gamecontainer">
+		<h1 class="unselectable">Sinking Ships!</h1>
+		<p id="guessescontainer">Take command of our new radar system to seek out and sink ze fiendishly hidden enemy!</p>
+
+		<div id="controls">
+			<div id="difficulty">
+				<button class="mode" data-rows="6" data-cols="6" data-ships="1">Easy</button>
+				<button class="mode" data-rows="8" data-cols="8" data-ships="2">Medium</button>
+				<button class="mode" data-rows="10" data-cols="10" data-ships="3">Hard</button>
+				<button id="customToggle">Custom</button>
+			</div>
+			<div id="custom" style="display:none">
+				<label>Rows <input id="customRows" type="number" min="1" max="20" value="10"></label>
+				<label>Cols <input id="customCols" type="number" min="1" max="20" value="10"></label>
+				<label>Ships <input id="customShips" type="number" min="1" value="1"></label>
+				<button id="startCustom">Start</button>
+			</div>
+			<div id="status">
+				<div id="bomb" class="unselectable"><h1 id="counter">0</h1></div>
+				<div id="message">Select a difficulty and press Start.</div>
+				<button id="reset">Play Again</button>
+			</div>
+		</div>
+
+		<div id="table" class="unselectable"></div>
 	</div>
 	
 	<!--Linking to the javascript source file-->
