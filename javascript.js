@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(hitShip){
 			hits.add(idx);
 			cell.classList.add('hit');
+			cell.textContent = '✹';
 			kaboom.play();
 			setMessage("Ka-BEWMM! Direct hit cap'n!!");
 			// check if this ship is fully sunk
@@ -110,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		} else {
 			misses.add(idx);
 			cell.classList.add('miss');
+			cell.textContent = 'X';
 			sploosh.play();
 			setMessage('SPLOOOSH!! That\'s a miss!');
 		}
